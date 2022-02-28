@@ -1,0 +1,14 @@
+mutation createOrganization($name: String!, $primaryLocation: ID!) {
+  createOrganization(
+    organization: {
+      name: $name
+      note: ""
+      image: ""
+      primaryLocation: $primaryLocation
+    }
+  ) {
+    agent {
+      id
+    }
+  }
+}

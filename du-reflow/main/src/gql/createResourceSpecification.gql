@@ -1,0 +1,17 @@
+mutation createResourceSpecification(
+  $name: String!
+  $note: String
+  $category: [ID!]
+) {
+  createResourceSpecification(
+    resourceSpecification: {
+      name: $name # mandatory
+      note: $note
+      tags: $category
+    }
+  ) {
+    resourceSpecification {
+      id
+    }
+  }
+}

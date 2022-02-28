@@ -1,0 +1,6 @@
+query getAgentRelationshipRoles {
+  agentRelationshipRoles {
+    id
+    roleLabel
+  }
+}

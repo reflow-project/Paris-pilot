@@ -1,0 +1,10 @@
+mutation createAgentRelationshipRole($roleLabel: String!) {
+  createAgentRelationshipRole(
+    agentRelationshipRole: { roleLabel: $roleLabel }
+  ) {
+    agentRelationshipRole {
+      id
+      roleLabel
+    }
+  }
+}

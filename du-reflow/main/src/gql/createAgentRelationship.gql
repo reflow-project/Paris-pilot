@@ -1,0 +1,17 @@
+mutation createAgentRelationship(
+  $object: ID!
+  $relationship: ID!
+  $subject: ID!
+) {
+  createAgentRelationship(
+    relationship: {
+      object: $object
+      relationship: $relationship
+      subject: $subject
+    }
+  ) {
+    agentRelationship {
+      id
+    }
+  }
+}

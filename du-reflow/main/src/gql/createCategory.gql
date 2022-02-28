@@ -1,8 +1,14 @@
 # ex:
 # name = 'plastic'
 # summary = 'A plastic material type created for dimension use to reflowOS junction'
-mutation createCategory ($name: String!, $summary: String) {
-  createCategory (category: {name: $name, summary: $summary}) {
-    __typename
+mutation createCategory($name: String!, $summary: String, $parentCategory: ID) {
+  createCategory(
+    category: {
+      name: $name
+      summary: $summary
+      parentCategory: $parentCategory
+    }
+  ) {
+    id
   }
 }

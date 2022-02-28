@@ -4346,15 +4346,73 @@ export type PlanProcessSearchParams = {
   searchString?: InputMaybe<Scalars['String']>;
 };
 
-export type CreateEconomicEventMutationVariables = Exact<{
+export type CreateAgentRelationshipMutationVariables = Exact<{
+  object: Scalars['ID'];
+  relationship: Scalars['ID'];
+  subject: Scalars['ID'];
+}>;
+
+
+export type CreateAgentRelationshipMutation = { __typename?: 'RootMutationType', createAgentRelationship?: { __typename?: 'AgentRelationshipResponse', agentRelationship: { __typename?: 'AgentRelationship', id: string } } | null };
+
+export type CreateAgentRelationshipRoleMutationVariables = Exact<{
+  roleLabel: Scalars['String'];
+}>;
+
+
+export type CreateAgentRelationshipRoleMutation = { __typename?: 'RootMutationType', createAgentRelationshipRole?: { __typename?: 'AgentRelationshipRoleResponse', agentRelationshipRole?: { __typename?: 'AgentRelationshipRole', id: string, roleLabel: string } | null } | null };
+
+export type CreateCategoryMutationVariables = Exact<{
+  name: Scalars['String'];
+  summary?: InputMaybe<Scalars['String']>;
+  parentCategory?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type CreateCategoryMutation = { __typename?: 'RootMutationType', createCategory?: { __typename?: 'Category', id?: string | null } | null };
+
+export type CreateEconomicEventProduceMutationVariables = Exact<{
   agent: Scalars['ID'];
   unit: Scalars['ID'];
   note?: InputMaybe<Scalars['String']>;
   quantity?: InputMaybe<Scalars['Float']>;
+  resourceSpec?: InputMaybe<Scalars['ID']>;
+  categories?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
 }>;
 
 
-export type CreateEconomicEventMutation = { __typename?: 'RootMutationType', createEconomicEvent?: { __typename?: 'EconomicEventResponse', economicEvent: { __typename?: 'EconomicEvent', id: string, note?: string | null, receiver: never, provider: never, resourceQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, resourceInventoriedAs?: { __typename?: 'EconomicResource', id: string, name?: string | null, onhandQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, accountingQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null } | null } } | null };
+export type CreateEconomicEventProduceMutation = { __typename?: 'RootMutationType', createEconomicEvent?: { __typename?: 'EconomicEventResponse', economicEvent: { __typename?: 'EconomicEvent', id: string, note?: string | null, receiver: never, provider: never, resourceQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, resourceInventoriedAs?: { __typename?: 'EconomicResource', id: string, name?: string | null, onhandQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, accountingQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null } | null }, economicResource?: { __typename?: 'EconomicResource', id: string } | null } | null };
+
+export type CreateEconomicEventTransferMutationVariables = Exact<{
+  provider: Scalars['ID'];
+  receiver: Scalars['ID'];
+  unit: Scalars['ID'];
+  note?: InputMaybe<Scalars['String']>;
+  quantity?: InputMaybe<Scalars['Float']>;
+  resource?: InputMaybe<Scalars['ID']>;
+  resourceSpec?: InputMaybe<Scalars['ID']>;
+  categories?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+}>;
+
+
+export type CreateEconomicEventTransferMutation = { __typename?: 'RootMutationType', createEconomicEvent?: { __typename?: 'EconomicEventResponse', economicEvent: { __typename?: 'EconomicEvent', id: string, note?: string | null, receiver: never, provider: never, resourceQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, resourceInventoriedAs?: { __typename?: 'EconomicResource', id: string, name?: string | null, onhandQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null, accountingQuantity?: { __typename?: 'Measure', hasNumericalValue: number, hasUnit: { __typename?: 'Unit', label: string, symbol: string } } | null } | null }, economicResource?: { __typename?: 'EconomicResource', id: string } | null } | null };
+
+export type CreateOrganizationMutationVariables = Exact<{
+  name: Scalars['String'];
+  primaryLocation: Scalars['ID'];
+}>;
+
+
+export type CreateOrganizationMutation = { __typename?: 'RootMutationType', createOrganization?: { __typename?: 'OrganizationResponse', agent: { __typename?: 'Organization', id: string } } | null };
+
+export type CreateResourceSpecificationMutationVariables = Exact<{
+  name: Scalars['String'];
+  note?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+}>;
+
+
+export type CreateResourceSpecificationMutation = { __typename?: 'RootMutationType', createResourceSpecification?: { __typename?: 'ResourceSpecificationResponse', resourceSpecification?: { __typename?: 'ResourceSpecification', id: string } | null } | null };
 
 export type CreateStMutationVariables = Exact<{
   alt?: InputMaybe<Scalars['Float']>;
@@ -4368,26 +4426,68 @@ export type CreateStMutationVariables = Exact<{
 export type CreateStMutation = { __typename?: 'RootMutationType', createSpatialThing?: { __typename?: 'SpatialThingResponse', spatialThing?: { __typename?: 'SpatialThing', id: string } | null } | null };
 
 export type CreateUnitMutationVariables = Exact<{
-  inScopeOf?: InputMaybe<Scalars['ID']>;
+  label: Scalars['String'];
 }>;
 
 
-export type CreateUnitMutation = { __typename?: 'RootMutationType', createUnit?: { __typename?: 'UnitResponse', unit?: { __typename?: 'Unit', id: string, canonicalUrl?: any | null, label: string, symbol: string } | null } | null };
+export type CreateUnitMutation = { __typename?: 'RootMutationType', createUnit?: { __typename?: 'UnitResponse', unit?: { __typename?: 'Unit', id: string, label: string, symbol: string } | null } | null };
 
-export type CreateWarehouseMutationVariables = Exact<{
-  name: Scalars['String'];
-  primaryLocation: Scalars['ID'];
-}>;
+export type GetAgentRelationshipRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateWarehouseMutation = { __typename?: 'RootMutationType', createOrganization?: { __typename?: 'OrganizationResponse', agent: { __typename?: 'Organization', id: string } } | null };
+export type GetAgentRelationshipRolesQuery = { __typename?: 'RootQueryType', agentRelationshipRoles?: Array<{ __typename?: 'AgentRelationshipRole', id: string, roleLabel: string }> | null };
+
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const CreateEconomicEventDocument = gql`
-    mutation createEconomicEvent($agent: ID!, $unit: ID!, $note: String = "No description", $quantity: Float = 300) {
+export type GetCategoriesQuery = { __typename?: 'RootQueryType', categories: { __typename?: 'CategoriesPage', edges: Array<{ __typename?: 'Category', id?: string | null, name?: string | null }> } };
+
+export type GetOrganizationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrganizationsQuery = { __typename?: 'RootQueryType', organizations?: Array<{ __typename?: 'Organization', id: string, name: string }> | null };
+
+export type GetUnitsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUnitsQuery = { __typename?: 'RootQueryType', units?: Array<{ __typename?: 'Unit', id: string, label: string, symbol: string }> | null };
+
+
+export const CreateAgentRelationshipDocument = gql`
+    mutation createAgentRelationship($object: ID!, $relationship: ID!, $subject: ID!) {
+  createAgentRelationship(
+    relationship: {object: $object, relationship: $relationship, subject: $subject}
+  ) {
+    agentRelationship {
+      id
+    }
+  }
+}
+    `;
+export const CreateAgentRelationshipRoleDocument = gql`
+    mutation createAgentRelationshipRole($roleLabel: String!) {
+  createAgentRelationshipRole(agentRelationshipRole: {roleLabel: $roleLabel}) {
+    agentRelationshipRole {
+      id
+      roleLabel
+    }
+  }
+}
+    `;
+export const CreateCategoryDocument = gql`
+    mutation createCategory($name: String!, $summary: String, $parentCategory: ID) {
+  createCategory(
+    category: {name: $name, summary: $summary, parentCategory: $parentCategory}
+  ) {
+    id
+  }
+}
+    `;
+export const CreateEconomicEventProduceDocument = gql`
+    mutation createEconomicEventProduce($agent: ID!, $unit: ID!, $note: String = "No description", $quantity: Float = 1, $resourceSpec: ID, $categories: [ID!]) {
   createEconomicEvent(
-    event: {note: $note, action: "use", provider: $agent, receiver: $agent, resourceQuantity: {hasUnit: $unit, hasNumericalValue: $quantity}}
-    newInventoriedResource: {name: "Stand"}
+    event: {note: $note, action: "produce", provider: $agent, receiver: $agent, resourceQuantity: {hasUnit: $unit, hasNumericalValue: $quantity}}
+    newInventoriedResource: {conformsTo: $resourceSpec, tags: $categories}
   ) {
     economicEvent {
       id
@@ -4428,6 +4528,81 @@ export const CreateEconomicEventDocument = gql`
         }
       }
     }
+    economicResource {
+      id
+    }
+  }
+}
+    `;
+export const CreateEconomicEventTransferDocument = gql`
+    mutation createEconomicEventTransfer($provider: ID!, $receiver: ID!, $unit: ID!, $note: String = "No description", $quantity: Float = 1, $resource: ID, $resourceSpec: ID, $categories: [ID!]) {
+  createEconomicEvent(
+    event: {note: $note, action: "transfer", provider: $provider, receiver: $receiver, resourceInventoriedAs: $resource, resourceQuantity: {hasUnit: $unit, hasNumericalValue: $quantity}}
+  ) {
+    economicEvent {
+      id
+      note
+      receiver {
+        id
+        name
+        note
+      }
+      provider {
+        id
+        name
+        note
+      }
+      resourceQuantity {
+        hasNumericalValue
+        hasUnit {
+          label
+          symbol
+        }
+      }
+      resourceInventoriedAs {
+        id
+        name
+        onhandQuantity {
+          hasNumericalValue
+          hasUnit {
+            label
+            symbol
+          }
+        }
+        accountingQuantity {
+          hasNumericalValue
+          hasUnit {
+            label
+            symbol
+          }
+        }
+      }
+    }
+    economicResource {
+      id
+    }
+  }
+}
+    `;
+export const CreateOrganizationDocument = gql`
+    mutation createOrganization($name: String!, $primaryLocation: ID!) {
+  createOrganization(
+    organization: {name: $name, note: "", image: "", primaryLocation: $primaryLocation}
+  ) {
+    agent {
+      id
+    }
+  }
+}
+    `;
+export const CreateResourceSpecificationDocument = gql`
+    mutation createResourceSpecification($name: String!, $note: String, $category: [ID!]) {
+  createResourceSpecification(
+    resourceSpecification: {name: $name, note: $note, tags: $category}
+  ) {
+    resourceSpecification {
+      id
+    }
   }
 }
     `;
@@ -4443,25 +4618,48 @@ export const CreateStDocument = gql`
 }
     `;
 export const CreateUnitDocument = gql`
-    mutation createUnit($inScopeOf: ID) {
-  createUnit(unit: {inScopeOf: $inScopeOf, label: "", symbol: ""}) {
+    mutation createUnit($label: String!) {
+  createUnit(unit: {label: $label, symbol: ""}) {
     unit {
       id
-      canonicalUrl
       label
       symbol
     }
   }
 }
     `;
-export const CreateWarehouseDocument = gql`
-    mutation createWarehouse($name: String!, $primaryLocation: ID!) {
-  createOrganization(
-    organization: {name: $name, note: "", image: "", primaryLocation: $primaryLocation}
-  ) {
-    agent {
+export const GetAgentRelationshipRolesDocument = gql`
+    query getAgentRelationshipRoles {
+  agentRelationshipRoles {
+    id
+    roleLabel
+  }
+}
+    `;
+export const GetCategoriesDocument = gql`
+    query getCategories {
+  categories {
+    edges {
       id
+      name
     }
+  }
+}
+    `;
+export const GetOrganizationsDocument = gql`
+    query getOrganizations {
+  organizations {
+    id
+    name
+  }
+}
+    `;
+export const GetUnitsDocument = gql`
+    query getUnits {
+  units {
+    id
+    label
+    symbol
   }
 }
     `;
@@ -4473,17 +4671,44 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    createEconomicEvent(variables: CreateEconomicEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateEconomicEventMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateEconomicEventMutation>(CreateEconomicEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createEconomicEvent');
+    createAgentRelationship(variables: CreateAgentRelationshipMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateAgentRelationshipMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateAgentRelationshipMutation>(CreateAgentRelationshipDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createAgentRelationship');
+    },
+    createAgentRelationshipRole(variables: CreateAgentRelationshipRoleMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateAgentRelationshipRoleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateAgentRelationshipRoleMutation>(CreateAgentRelationshipRoleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createAgentRelationshipRole');
+    },
+    createCategory(variables: CreateCategoryMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateCategoryMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateCategoryMutation>(CreateCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCategory');
+    },
+    createEconomicEventProduce(variables: CreateEconomicEventProduceMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateEconomicEventProduceMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateEconomicEventProduceMutation>(CreateEconomicEventProduceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createEconomicEventProduce');
+    },
+    createEconomicEventTransfer(variables: CreateEconomicEventTransferMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateEconomicEventTransferMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateEconomicEventTransferMutation>(CreateEconomicEventTransferDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createEconomicEventTransfer');
+    },
+    createOrganization(variables: CreateOrganizationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateOrganizationMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOrganizationMutation>(CreateOrganizationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createOrganization');
+    },
+    createResourceSpecification(variables: CreateResourceSpecificationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateResourceSpecificationMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateResourceSpecificationMutation>(CreateResourceSpecificationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createResourceSpecification');
     },
     createST(variables: CreateStMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateStMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateStMutation>(CreateStDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createST');
     },
-    createUnit(variables?: CreateUnitMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateUnitMutation> {
+    createUnit(variables: CreateUnitMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateUnitMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateUnitMutation>(CreateUnitDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUnit');
     },
-    createWarehouse(variables: CreateWarehouseMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateWarehouseMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateWarehouseMutation>(CreateWarehouseDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createWarehouse');
+    getAgentRelationshipRoles(variables?: GetAgentRelationshipRolesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAgentRelationshipRolesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAgentRelationshipRolesQuery>(GetAgentRelationshipRolesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAgentRelationshipRoles');
+    },
+    getCategories(variables?: GetCategoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetCategoriesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoriesQuery>(GetCategoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCategories');
+    },
+    getOrganizations(variables?: GetOrganizationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetOrganizationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrganizationsQuery>(GetOrganizationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getOrganizations');
+    },
+    getUnits(variables?: GetUnitsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUnitsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUnitsQuery>(GetUnitsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUnits');
     }
   };
 }

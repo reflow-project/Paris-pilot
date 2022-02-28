@@ -1,0 +1,11 @@
+# ex:
+# name = 'plastic'
+# summary = 'A plastic material type created for dimension use to reflowOS junction'
+query getCategories {
+  categories {
+    edges {
+      id
+      name
+    }
+  }
+}

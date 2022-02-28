@@ -1,0 +1,7 @@
+query getUnits {
+  units {
+    id
+    label
+    symbol
+  }
+}

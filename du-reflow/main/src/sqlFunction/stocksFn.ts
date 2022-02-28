@@ -1,7 +1,8 @@
 import { Connection, ResultSetHeader, RowDataPacket } from "mysql2";
+import { Material } from "./materialsFn";
 type AutoAcq = "manuel" | "semi auto" | "auto";
-type Condition = "perfect" | "verygood" | "good" | "bad" | "verybad";
-type Shape = "rectangle" | "circular" | "polygon";
+export type Condition = "perfect" | "verygood" | "good" | "bad" | "verybad";
+export type Shape = "rectangle" | "circular" | "polygon";
 type Float = number;
 type Int = number;
 
@@ -25,11 +26,9 @@ export interface Stock {
   image_filename?: string;
 }
 
-export interface Material {
-  material_id: Int;
-  material_type: "metal" | "wood" | "plastic";
-  name: string;
-  description?: string;
+export interface StockIdAndGraphQLId {
+  stock_id: number;
+  graphql_id?: string;
 }
 
 export function getStocks(connection: Connection): Promise<Stock[]> {
@@ -59,6 +58,7 @@ export function getStocks(connection: Connection): Promise<Stock[]> {
         image_filename
       FROM stocks
       JOIN materials ON stocks.material_id = materials.material_id
+      WHERE stocks.last_transfer IS NULL OR stocks.last_transfer < stocks.updated_at
       `,
       function (err, results, fields) {
         if (err) {
@@ -101,6 +101,117 @@ export function getStocks(connection: Connection): Promise<Stock[]> {
         }
 
         resolve(finalRes);
+      }
+    );
+  });
+}
+
+export function getBindListStocksIdAndEconomicEventsId(connection: Connection): Promise<StockIdAndGraphQLId[]> {
+  return new Promise((resolve, reject) => {
+    // simple query
+    connection.query(
+      /*sql*/ `
+      SELECT stock_id, graphql_id
+      FROM stocks
+      `,
+      function (err, results, fields) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        const finalRes: StockIdAndGraphQLId[] = [];
+        if (Array.isArray(results)) {
+          for (const r of results) {
+            if (!Array.isArray(r) && "RowDataPacket" === r.constructor.name) {
+              const w = {
+                stock_id: r["stock_id"],
+                graphql_id: r["graphql_id"],
+              };
+              finalRes.push(w);
+            } else {
+              console.warn(`Unexpected result: ${JSON.stringify(r)}`);
+            }
+          }
+        }
+        resolve(finalRes);
+      }
+    );
+  });
+}
+
+export function getShapeList(connection: Connection): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    // simple query
+    connection.query(
+      /*sql*/ `
+      SELECT DISTINCT shape
+      FROM stocks
+      `,
+      function (err, results, fields) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        const finalRes: string[] = [];
+        if (Array.isArray(results)) {
+          for (const r of results) {
+            if (!Array.isArray(r) && "RowDataPacket" === r.constructor.name) {
+              finalRes.push(r["shape"]);
+            } else {
+              console.warn(`Unexpected result: ${JSON.stringify(r)}`);
+            }
+          }
+        }
+        resolve(finalRes);
+      }
+    );
+  });
+}
+
+export function getCondList(connection: Connection): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    // simple query
+    connection.query(
+      /*sql*/ `
+      SELECT DISTINCT cond
+      FROM stocks
+      `,
+      function (err, results, fields) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        const finalRes: string[] = [];
+        if (Array.isArray(results)) {
+          for (const r of results) {
+            if (!Array.isArray(r) && "RowDataPacket" === r.constructor.name) {
+              finalRes.push(r["cond"]);
+            } else {
+              console.warn(`Unexpected result: ${JSON.stringify(r)}`);
+            }
+          }
+        }
+        resolve(finalRes);
+      }
+    );
+  });
+}
+
+export function updateStockGraphQLId(connection: Connection, stock_id: number, graphql_id: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    // simple query
+    connection.query(
+      /*sql*/ `
+      UPDATE stocks 
+      SET last_transfer = CURRENT_TIMESTAMP, graphql_id = ` + graphql_id + `
+      WHERE stock_id = ` + stock_id + `
+      `,
+      function(err, results, fields) {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve({fields})
       }
     );
   });
