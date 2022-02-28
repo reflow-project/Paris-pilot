@@ -1,0 +1,60 @@
+mutation createEconomicEvent(
+  $agent: ID!
+  $unit: ID!
+  $note: String = "No description"
+  $quantity: Float = 300
+) {
+  createEconomicEvent(
+    event: {
+      note: $note
+      action: "use" # eg. produce or raise
+      provider: $agent # same provider & receiver ? should probably be the org's agent ID (see previous mutation)
+      receiver: $agent
+      resourceQuantity: { hasUnit: $unit, hasNumericalValue: $quantity }
+    }
+    newInventoriedResource: {
+      # details of the new resource
+      name: "Stand"
+    }
+  ) {
+    economicEvent {
+      id
+      note
+      receiver {
+        id
+        name
+        note
+      }
+      provider {
+        id
+        name
+        note
+      }
+      resourceQuantity {
+        hasNumericalValue
+        hasUnit {
+          label
+          symbol
+        }
+      }
+      resourceInventoriedAs {
+        id
+        name
+        onhandQuantity {
+          hasNumericalValue
+          hasUnit {
+            label
+            symbol
+          }
+        }
+        accountingQuantity {
+          hasNumericalValue
+          hasUnit {
+            label
+            symbol
+          }
+        }
+      }
+    }
+  }
+}

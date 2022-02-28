@@ -1,0 +1,12 @@
+
+# A simple unit creation mutation.
+mutation createUnit ($inScopeOf: ID) {
+	createUnit (unit: {inScopeOf: $inScopeOf, label: "", symbol: ""}) {
+    unit {
+      id
+      canonicalUrl
+      label
+      symbol
+    }
+  }
+}

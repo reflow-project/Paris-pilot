@@ -1,0 +1,22 @@
+mutation createST(
+  $alt: Float
+  $lat: Float
+  $long: Float
+  $mappableAddress: String
+  $name: String!
+) {
+  createSpatialThing(
+    spatialThing: {
+      alt: $alt
+      lat: $lat
+      long: $long
+      name: $name
+      mappableAddress: $mappableAddress
+      note: ""
+    }
+  ) {
+    spatialThing {
+      id
+    }
+  }
+}

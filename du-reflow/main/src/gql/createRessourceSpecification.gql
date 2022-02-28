@@ -1,0 +1,8 @@
+mutation createRessourceSpecification ($name: String!, $note: String) {
+  createResourceSpecification (resourceSpecification:{
+    name: $name # mandatory
+    note: $note
+  }) {
+    __typename
+  }
+}
