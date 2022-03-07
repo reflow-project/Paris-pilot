@@ -1,0 +1,121 @@
+@import "normalize.css/normalize.css";
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  font-weight: 400;
+  color: var(--primary);
+  font-size: var(--fontSize-base);
+  forced-color-adjust: exact !important;
+}
+
+.link {
+  font-weight: 600;
+  position: relative;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  cursor: pointer;
+}
+
+.link-simple {
+  font-weight: 400;
+  position: relative;
+  cursor: pointer;
+}
+
+
+
+.link-simple a, .link-simple a:visited,
+.link a, .link a:visited {
+  color: inherit;
+}
+
+.link-simple:hover,
+.link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+
+}
+
+.button {
+  background: var(--white);
+  padding: 0.5rem 1rem;
+  border: var(--primary) solid var(--borderWidth-lg);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--coolGray-100);
+}
+
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+strong {
+  font-weight: 600;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.select__control {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.select__value-container {
+  padding: 0 !important;
+}
+
+.select__control * {
+  color: var(--primary) !important;
+}
+
+
+
+
+
+
+@media print {
+  html, body {
+    font-size: var(--fontSize-sm);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .link {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  @page {
+    margin: 2cm;
+    size: A4 landscape;
+  }
+}
