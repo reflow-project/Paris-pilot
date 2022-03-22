@@ -1,5 +1,9 @@
 # Paris-pilot
-Repository for the models and software developed for the Paris pilot
+Repository for the models and software developed for the Paris pilot.
+
+Specific README for the two prototypes are at:
+- Dimension-use README [here](https://github.com/reflow-project/Paris-pilot/blob/main/du-reflow/README.md)
+- Re-Label README [here](https://github.com/reflow-project/Paris-pilot/blob/main/relabel/README.md)
 
 # License Note
 From Reflow's Consortium Agreement, Art. 9.2.8:
